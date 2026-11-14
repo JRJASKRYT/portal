@@ -84,6 +84,28 @@
   }
   .area-juego iframe { width: 100%; height: 100%; border: 0; }
 
+  /* ---------- FICHA DEL JUEGO ---------- */
+  .info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .info div {
+    background: var(--panel);
+    padding: 16px 18px;
+    border-left: 4px solid var(--sangre);
+  }
+  .info h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .info p, .info li { margin: 0; font-size: .95rem; }
+  .info ul { margin: 0; padding-left: 18px; }
+  .historia { margin: 20px 0 0; max-width: 75ch; }
+  .historia h3 { margin: 0 0 8px; }
+  .historia p { margin: 0 0 10px; }
+  .ficha { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .ficha span { background: var(--panel); padding: 6px 12px; font-size: .85rem; border-radius: 4px; }
+  .equipo { margin: 16px 0 0; opacity: .7; font-size: .9rem; }
+
   footer { text-align: center; padding: 24px; opacity: .6; }
 </style>
 </head>
@@ -111,10 +133,59 @@
 
 <!-- ===== JUEGO 2: PAC-MAN ===== -->
 <section id="juego2">
-  <h2>Juego 2: Pac-Man 3D</h2>
-  <p class="desc">Junta las 36 monedas y escapa de los zombies.</p>
+  <h2>Juego 2: Pac-Man 3D, escapa del zombie</h2>
+  <p class="desc">Videojuego 3D de laberinto inspirado en Pac-Man, ambientado en un lugar abandonado al estilo The Walking Dead.</p>
   <button class="btn-start" id="start2">START</button>
   <div class="area-juego" id="area2">Presiona START para jugar</div>
+
+  <div class="historia">
+    <h3>La historia</h3>
+    <p>Negan despierta atrapado en un laberinto abandonado. Los pasillos están sucios, casi a oscuras, y dos zombies con boca de Pac-Man recorren el lugar sin descanso. La única salida es una puerta de metal oxidado que permanece cerrada hasta que Negan reúna las 36 monedas dispersas por el laberinto.</p>
+    <p>Cada moneda que recoge lo acerca a la salida, pero también despierta a los zombies: se vuelven un poco más rápidos. Hay que decidir cuándo arriesgarse y cuándo esperar.</p>
+  </div>
+
+  <div class="info">
+    <div>
+      <h3>Objetivo</h3>
+      <p>Junta las 36 monedas. Aparecen en lugares al azar, así que cada partida es distinta. Con todas reunidas, la puerta roja de arriba se vuelve verde. Llega a ella para ganar. Si un zombie te atrapa, la partida termina de inmediato.</p>
+    </div>
+    <div>
+      <h3>Controles</h3>
+      <ul>
+        <li>Flechas: correr</li>
+        <li>Mouse: mover la cámara (haz clic en el juego para activarlo)</li>
+        <li>C: vista panorámica del laberinto</li>
+        <li>R: reiniciar con monedas nuevas</li>
+        <li>Esc: soltar el cursor</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Los zombies</h3>
+      <p>Son dos. Uno patrulla la zona izquierda y el otro la derecha, siempre en bucle y por los pasillos, sin atravesar paredes. Empiezan a moverse unos segundos después de que arranca la partida. Negan corre más rápido que ellos al inicio, pero la ventaja se reduce con cada moneda.</p>
+    </div>
+    <div>
+      <h3>Ambientación</h3>
+      <p>Paredes de bloques sucios con grietas, musgo y sangre; piso de asfalto roto; niebla, luz tenue y focos que parpadean. Hay barriles, cajas, escombros y papeles tirados. Con la tecla C se ven por fuera los autos abandonados y los árboles secos.</p>
+    </div>
+    <div>
+      <h3>Consejo</h3>
+      <p>La columna central del laberinto es la zona más segura para cruzar, porque los zombies patrullan a los lados. Usa la vista panorámica para planear tu ruta antes de arriesgarte.</p>
+    </div>
+    <div>
+      <h3>Si te atrapan</h3>
+      <p>Aparece un susto con sonido, Negan cae con su animación de muerte y se muestra el mensaje «TE ATRAPARON». Presiona R para intentarlo otra vez.</p>
+    </div>
+  </div>
+
+  <div class="ficha">
+    <span>Unity 6</span>
+    <span>Laberinto de 11 × 9 celdas</span>
+    <span>36 monedas</span>
+    <span>2 zombies</span>
+    <span>Cámara en tercera persona</span>
+  </div>
+
+  <p class="equipo">Equipo: Jorge Angel Cores Andrade y Dustin Fernando Vaca Aguilar · Game Development, Unidad 3</p>
 </section>
 
 <footer>© TU NOMBRE</footer>
