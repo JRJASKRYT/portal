@@ -6,114 +6,226 @@
 <title>Portal de videojuegos</title>
 <style>
   :root {
-    --fondo: #1b1f24;
-    --panel: #232830;
-    --texto: #e8e2d6;
-    --sangre: #b3261e;
-    --sangre-claro: #d63a30;
+    --fondo: #0d0f16;
+    --panel: #161a26;
+    --borde: #2a3147;
+    --texto: #e9e6dc;
+    --sangre: #c8242b;
+    --sangre-claro: #ee3a41;
+    --moneda: #ffcf1f;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }              /* el menú baja suavemente */
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    background: var(--fondo);
+    background:
+      radial-gradient(ellipse at top, #1a1f33 0%, var(--fondo) 55%) fixed;
     color: var(--texto);
     font-family: "Trebuchet MS", Arial, sans-serif;
-    line-height: 1.5;
+    line-height: 1.55;
+  }
+  /* líneas de pantalla antigua, muy sutiles */
+  body::after {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 3px);
+    z-index: 50;
   }
 
-  /* ---------- BANNER (aquí va tu nombre) ---------- */
+  /* ---------- BANNER ---------- */
   header {
-    padding: 40px 20px 24px;
+    padding: 44px 20px 28px;
     text-align: center;
-    border-bottom: 4px solid var(--sangre);
+    border-bottom: 3px solid var(--sangre);
+    box-shadow: 0 6px 30px rgba(200,36,43,.35);
+  }
+  .titulo {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
   }
   header h1 {
     margin: 0;
-    font-family: "Arial Black", Impact, sans-serif;
-    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-family: Impact, "Arial Black", sans-serif;
+    font-size: clamp(2.2rem, 7vw, 4rem);
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--moneda);
+    text-shadow: 3px 3px 0 var(--sangre), 0 0 24px rgba(255,207,31,.45);
   }
-  header p { margin: 6px 0 20px; opacity: .8; }
+  /* Pac-Man hecho con CSS: lo más memorable del banner */
+  .pac {
+    width: 54px; height: 54px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--moneda);
+    box-shadow: 0 0 20px rgba(255,207,31,.6);
+    clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0, 50% 50%);
+    animation: chomp .5s steps(1) infinite alternate;
+  }
+  @keyframes chomp {
+    from { clip-path: polygon(100% 28%, 50% 50%, 100% 72%, 100% 100%, 0 100%, 0 0, 100% 0); }
+    to   { clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0); }
+  }
+  header p {
+    margin: 10px 0 24px;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    color: #9aa3c0;
+  }
 
   /* ---------- MENÚ ---------- */
-  nav { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  nav { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
   nav a {
-    padding: 10px 22px;
+    padding: 11px 24px;
     background: var(--sangre);
     color: #fff;
     text-decoration: none;
     font-weight: bold;
-    border-radius: 6px;
+    font-family: "Courier New", monospace;
+    font-size: 1rem;
+    border: 2px solid #fff;
+    box-shadow: 4px 4px 0 #000;
+    transition: transform .08s, box-shadow .08s, background .15s;
   }
-  nav a:hover, nav a:focus-visible { background: var(--sangre-claro); }
+  nav a:hover, nav a:focus-visible {
+    background: var(--sangre-claro);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #000;
+    outline: none;
+  }
+  nav a:active { transform: translate(4px, 4px); box-shadow: 0 0 0 #000; }
 
-  /* ---------- SECCIONES DE JUEGO ---------- */
+  /* ---------- SECCIONES ---------- */
   section {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 48px 20px;
+    padding: 52px 20px;
     scroll-margin-top: 10px;
   }
-  section h2 { margin: 0 0 6px; }
-  section .desc { margin: 0 0 16px; opacity: .8; }
+  section h2 {
+    margin: 0 0 6px;
+    font-family: Impact, "Arial Black", sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 4.5vw, 2.3rem);
+    letter-spacing: 1px;
+    color: var(--moneda);
+  }
+  section .desc { margin: 0 0 18px; color: #b9bed2; }
 
+  /* ---------- BOTÓN START ---------- */
   .btn-start {
     display: inline-block;
-    margin-bottom: 14px;
-    padding: 12px 36px;
-    font-size: 1.1rem;
+    margin-bottom: 16px;
+    padding: 13px 44px;
+    font-family: "Courier New", monospace;
+    font-size: 1.2rem;
     font-weight: bold;
-    color: #fff;
-    background: var(--sangre);
-    border: 0;
-    border-radius: 6px;
+    color: #1a1200;
+    background: var(--moneda);
+    border: 2px solid #fff;
+    box-shadow: 5px 5px 0 #000;
     cursor: pointer;
+    animation: pulso 1.4s ease-in-out infinite;
   }
-  .btn-start:hover { background: var(--sangre-claro); }
-  .btn-start:disabled { background: #555; cursor: default; }
+  .btn-start:hover { background: #ffe066; }
+  .btn-start:active { transform: translate(3px, 3px); box-shadow: 2px 2px 0 #000; }
+  .btn-start:disabled {
+    background: #3a3f55; color: #8d93ad; border-color: #555;
+    box-shadow: none; cursor: default; animation: none;
+  }
+  @keyframes pulso {
+    0%, 100% { box-shadow: 5px 5px 0 #000, 0 0 0 rgba(255,207,31,0); }
+    50%      { box-shadow: 5px 5px 0 #000, 0 0 22px rgba(255,207,31,.65); }
+  }
 
+  /* ---------- PANTALLA DE JUEGO ---------- */
   .area-juego {
     width: 100%;
     height: 600px;
     background: #000;
-    border: 2px solid var(--panel);
+    border: 3px solid var(--borde);
+    outline: 2px solid var(--sangre);
+    outline-offset: 5px;
+    box-shadow: 0 0 40px rgba(200,36,43,.35), inset 0 0 60px rgba(0,0,0,.8);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #888;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    color: #6f7691;
   }
   .area-juego iframe { width: 100%; height: 100%; border: 0; }
 
-  /* ---------- FICHA DEL JUEGO ---------- */
+  /* ---------- HISTORIA Y FICHAS ---------- */
+  .historia { margin: 34px 0 0; max-width: 75ch; }
+  .historia h3 { margin: 0 0 8px; color: var(--moneda); font-family: "Courier New", monospace; }
+  .historia p { margin: 0 0 10px; }
+
   .info {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 16px;
-    margin-top: 20px;
+    margin-top: 22px;
   }
   .info div {
+    position: relative;
     background: var(--panel);
     padding: 16px 18px;
-    border-left: 4px solid var(--sangre);
+    border: 1px solid var(--borde);
+    border-left: 4px solid var(--moneda);
   }
-  .info h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .info h3 {
+    margin: 0 0 8px;
+    font-family: "Courier New", monospace;
+    font-size: 1.05rem;
+    color: var(--moneda);
+  }
   .info p, .info li { margin: 0; font-size: .95rem; }
   .info ul { margin: 0; padding-left: 18px; }
-  .historia { margin: 20px 0 0; max-width: 75ch; }
-  .historia h3 { margin: 0 0 8px; }
-  .historia p { margin: 0 0 10px; }
-  .ficha { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
-  .ficha span { background: var(--panel); padding: 6px 12px; font-size: .85rem; border-radius: 4px; }
-  .equipo { margin: 16px 0 0; opacity: .7; font-size: .9rem; }
+  .info kbd {
+    font-family: "Courier New", monospace;
+    background: #0b0d14;
+    border: 1px solid #55607f;
+    border-bottom-width: 3px;
+    padding: 0 6px;
+    border-radius: 4px;
+    font-size: .85rem;
+  }
 
-  footer { text-align: center; padding: 24px; opacity: .6; }
+  .ficha { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .ficha span {
+    background: #0b0d14;
+    border: 1px solid var(--sangre);
+    color: #f1c8ca;
+    padding: 5px 12px;
+    font-family: "Courier New", monospace;
+    font-size: .85rem;
+    font-weight: bold;
+  }
+  .equipo { margin: 18px 0 0; color: #8d93ad; font-size: .9rem; }
+
+  footer { text-align: center; padding: 28px; color: #6f7691; font-family: "Courier New", monospace; }
+
+  @media (max-width: 600px) {
+    .area-juego { height: 420px; }
+    .pac { width: 38px; height: 38px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pac, .btn-start { animation: none; }
+    html { scroll-behavior: auto; }
+  }
 </style>
 </head>
 <body>
 
 <!-- ===== BANNER: CAMBIA "TU NOMBRE" POR TU NOMBRE O ALIAS ===== -->
 <header>
-  <h1>TU NOMBRE</h1>
+  <div class="titulo">
+    <span class="pac" aria-hidden="true"></span>
+    <h1>BinarySouls</h1>
+  </div>
   <p>Game Developer · Portal de videojuegos</p>
 
   <!-- ===== MENÚ: cada enlace baja a la sección con ese id ===== -->
@@ -152,11 +264,11 @@
     <div>
       <h3>Controles</h3>
       <ul>
-        <li>Flechas: correr</li>
+        <li><kbd>←</kbd> <kbd>↑</kbd> <kbd>↓</kbd> <kbd>→</kbd> correr</li>
         <li>Mouse: mover la cámara (haz clic en el juego para activarlo)</li>
-        <li>C: vista panorámica del laberinto</li>
-        <li>R: reiniciar con monedas nuevas</li>
-        <li>Esc: soltar el cursor</li>
+        <li><kbd>C</kbd> vista panorámica del laberinto</li>
+        <li><kbd>R</kbd> reiniciar con monedas nuevas</li>
+        <li><kbd>Esc</kbd> soltar el cursor</li>
       </ul>
     </div>
     <div>
@@ -179,7 +291,7 @@
 
   <div class="ficha">
     <span>Unity 6</span>
-    <span>Laberinto de 11 × 9 celdas</span>
+    <span>Laberinto 11 × 9</span>
     <span>36 monedas</span>
     <span>2 zombies</span>
     <span>Cámara en tercera persona</span>
@@ -188,7 +300,7 @@
   <p class="equipo">Equipo: Jorge Angel Cores Andrade y Dustin Fernando Vaca Aguilar · Game Development, Unidad 3</p>
 </section>
 
-<footer>© TU NOMBRE</footer>
+<footer>© BinarySouls</footer>
 
 <script>
   /* Al presionar START se crea el iframe con el juego, dentro de la misma página.
