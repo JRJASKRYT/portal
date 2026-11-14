@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal de videojuegos</title>
+<style>
+  :root {
+    --fondo: #1b1f24;
+    --panel: #232830;
+    --texto: #e8e2d6;
+    --sangre: #b3261e;
+    --sangre-claro: #d63a30;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }              /* el menú baja suavemente */
+  body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    line-height: 1.5;
+  }
+
+  /* ---------- BANNER (aquí va tu nombre) ---------- */
+  header {
+    padding: 40px 20px 24px;
+    text-align: center;
+    border-bottom: 4px solid var(--sangre);
+  }
+  header h1 {
+    margin: 0;
+    font-family: "Arial Black", Impact, sans-serif;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+  }
+  header p { margin: 6px 0 20px; opacity: .8; }
+
+  /* ---------- MENÚ ---------- */
+  nav { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  nav a {
+    padding: 10px 22px;
+    background: var(--sangre);
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 6px;
+  }
+  nav a:hover, nav a:focus-visible { background: var(--sangre-claro); }
+
+  /* ---------- SECCIONES DE JUEGO ---------- */
+  section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 48px 20px;
+    scroll-margin-top: 10px;
+  }
+  section h2 { margin: 0 0 6px; }
+  section .desc { margin: 0 0 16px; opacity: .8; }
+
+  .btn-start {
+    display: inline-block;
+    margin-bottom: 14px;
+    padding: 12px 36px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background: var(--sangre);
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .btn-start:hover { background: var(--sangre-claro); }
+  .btn-start:disabled { background: #555; cursor: default; }
+
+  .area-juego {
+    width: 100%;
+    height: 600px;
+    background: #000;
+    border: 2px solid var(--panel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+  }
+  .area-juego iframe { width: 100%; height: 100%; border: 0; }
+
+  footer { text-align: center; padding: 24px; opacity: .6; }
+</style>
+</head>
+<body>
+
+<!-- ===== BANNER: CAMBIA "TU NOMBRE" POR TU NOMBRE O ALIAS ===== -->
+<header>
+  <h1>TU NOMBRE</h1>
+  <p>Game Developer · Portal de videojuegos</p>
+
+  <!-- ===== MENÚ: cada enlace baja a la sección con ese id ===== -->
+  <nav>
+    <a href="#juego1">Juego 1</a>
+    <a href="#juego2">Juego 2: Pac-Man</a>
+  </nav>
+</header>
+
+<!-- ===== JUEGO 1 ===== -->
+<section id="juego1">
+  <h2>Juego 1</h2>
+  <p class="desc">CAMBIA: nombre y descripción corta de tu primer videojuego.</p>
+  <button class="btn-start" id="start1">START</button>
+  <div class="area-juego" id="area1">Presiona START para jugar</div>
+</section>
+
+<!-- ===== JUEGO 2: PAC-MAN ===== -->
+<section id="juego2">
+  <h2>Juego 2: Pac-Man 3D</h2>
+  <p class="desc">Junta las 36 monedas y escapa de los zombies.</p>
+  <button class="btn-start" id="start2">START</button>
+  <div class="area-juego" id="area2">Presiona START para jugar</div>
+</section>
+
+<footer>© TU NOMBRE</footer>
+
+<script>
+  /* Al presionar START se crea el iframe con el juego, dentro de la misma página.
+     Antes de presionarlo, el juego NO se carga ni se ejecuta. */
+  function conectarStart(idBoton, idArea, rutaJuego) {
+    var boton = document.getElementById(idBoton);
+    var area  = document.getElementById(idArea);
+    boton.addEventListener('click', function () {
+      area.innerHTML = '';
+      var marco = document.createElement('iframe');
+      marco.src = rutaJuego;
+      marco.setAttribute('allowfullscreen', '');
+      area.appendChild(marco);
+      boton.disabled = true;
+      boton.textContent = 'EN JUEGO';
+    });
+  }
+
+  /* CAMBIA LAS RUTAS por las carpetas donde pusiste cada juego */
+  conectarStart('start1', 'area1', 'juego1/index.html');
+  conectarStart('start2', 'area2', 'pacman/index.html');
+</script>
+
+</body>
+</html>
